@@ -1,0 +1,18 @@
+# Created by .ignore support plugin (hsz.mobi)
+!requirements.txt
+!.gitignore
+.idea/
+__pycache__/
+.vscode
+*.pyc
+log/
+fixtures/
+sent_emails/
+db.*
+*.bak
+.coverage
+htmlcov/
+.pytest_cache
+kas-file-resubmit/
+coverage.xml
+unittest.xml

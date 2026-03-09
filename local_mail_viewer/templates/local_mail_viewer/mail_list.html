@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'local_mail_viewer/css/default.css' %}">
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'E-mail files' %}
+{% endblock %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <table id="mail-list" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Date' %}</th>
+                        <th>{% trans 'Subject' %}</th>
+                        <th>{% trans 'Receiver' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in filelist %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'mail:mail-detail' file.name %}">
+                                {{ file.date|date:'SHORT_DATETIME_FORMAT'}}
+                            </a>
+                        </td>
+                        <td>{{ file.subject }}</td>
+                        <td>{{ file.rec }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12 buttons">
+            <a class="btn btn-vr btn-secondary" href="{% url 'home' %}">
+                <i class="fas fa-home"></i>
+            </a>
+            <a class="btn btn-vr btn-danger {% if not filelist %} disabled{% endif %}" href="{% url 'mail:delete_all' %}">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+        </div>
+
+    </div>
+
+</form>
+
+{% endblock %}

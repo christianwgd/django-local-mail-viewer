@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block page_title %}
+    {{ filename }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h5>{% trans 'Date' %}</h5>
+        <p>{{ date }}<p/>
+
+        <h5>{% trans 'From' %}</h5>
+        <p>{{ from }}<p/>
+
+        <h5>{% trans 'To' %}</h5>
+        <p>{{ to }}<p/>
+
+        {% if cc %}
+            <h5>{% trans 'cc' %}</h5>
+            <p>{{ cc }}<p/>
+        {% endif %}
+
+        <h5>{% trans 'Subject' %}</h5>
+        <p>{{ subject }}<p/>
+
+        <h5>{% trans 'Body' %}</h5>
+        <p>{{ body|linebreaks }}</p>
+
+        {% for attachment in attachments %}
+        <h5>{% trans 'Attachments' %}</h5>
+        <p>
+            <b>{% trans 'Content Type' %}</b>: {{ attachment.type }}<br/>
+            <b>{% trans 'Name' %}</b>: {{ attachment.name }}<br/>
+            {% if attachment.content %}
+                <br/>
+                <b>{% trans 'Content' %}</b>:
+                {{ attachment.content|safe }}
+            {% endif %}
+        </p>
+        {% endfor %}
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 buttons">
+        <a class="btn btn-vr btn-secondary" href="{% url 'mail:mails' %}">
+            <i class="fas fa-check"></i>
+        </a>
+        <a class="btn btn-vr btn-danger" href="{% url 'mail:delete' filename %}">
+            <i class="fas fa-trash-alt"></i>
+        </a>
+    </div>
+</div>
+{% endblock %}

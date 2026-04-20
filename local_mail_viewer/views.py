@@ -2,7 +2,6 @@ import datetime
 import email
 import fnmatch
 import os
-import traceback
 from email.header import make_header, decode_header
 
 from django.conf import settings
@@ -28,24 +27,20 @@ def mail_list(request):
 
     email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
     if email_path is not None:
-        try:
-            for _root, _dirs, files in os.walk(email_path):  # @UnusedVariable
-                mails = fnmatch.filter(files, '*.log')
-                if len(mails) > 0:
-                    for mail in mails:
-                        mail_path = os.path.join(email_path, mail)
-                        filedate = datetime.datetime.fromtimestamp(os.path.getmtime(mail_path))
-                        with open(mail_path, encoding="utf-8") as mail_file:
-                            msg = email.message_from_file(mail_file)
-                            mail_subject = make_header(decode_header(msg['subject']))
-                            mail_to = msg['to']
-                            mailfile = MailFile(mail, mail_subject, filedate, mail_to)
-                            filelist.append(mailfile)
-                        mail_file.close()
-                    filelist.sort(key=sort_filenameby_date, reverse=True)
-        except Exception as exc:
-            traceback.print_exc()
-            messages.add_message(request, messages.ERROR, f'Dateifehler: {exc}!')
+        for _root, _dirs, files in os.walk(email_path):  # @UnusedVariable
+            mails = fnmatch.filter(files, '*.log')
+            if len(mails) > 0:
+                for mail in mails:
+                    mail_path = os.path.join(email_path, mail)
+                    filedate = datetime.datetime.fromtimestamp(os.path.getmtime(mail_path))
+                    with open(mail_path, encoding="utf-8") as mail_file:
+                        msg = email.message_from_file(mail_file)
+                        mail_subject = make_header(decode_header(msg['subject']))
+                        mail_to = msg['to']
+                        mailfile = MailFile(mail, mail_subject, filedate, mail_to)
+                        filelist.append(mailfile)
+                    mail_file.close()
+                filelist.sort(key=sort_filenameby_date, reverse=True)
 
     return render(request, 'local_mail_viewer/mail_list.html', {
         'filelist': filelist,

@@ -5,7 +5,6 @@ import os
 from email.header import make_header, decode_header
 
 from django.conf import settings
-from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy

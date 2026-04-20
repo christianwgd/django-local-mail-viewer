@@ -1,5 +1,4 @@
 import fnmatch
-import os
 import shutil
 from pathlib import Path
 from django.conf import settings
@@ -17,7 +16,7 @@ class MailTest(TestCase):
         self.fake = Faker('de_DE')
         self.user = user_model.objects.create(username=self.fake.user_name())
         Path(f'{settings.BASE_DIR}/sent_emails').mkdir(parents=True, exist_ok=True)
-        for _root, _dirs, files in os.walk('test_files'):
+        for _root, _dirs, files in Path('test_files').walk():
             mails = fnmatch.filter(files, '*.log')
             for mail_file in mails:
                 shutil.copy2(f'test_files/{mail_file}', 'sent_emails')

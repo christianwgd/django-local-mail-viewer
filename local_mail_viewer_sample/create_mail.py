@@ -8,7 +8,7 @@ def create_mail_plain(attachment: str | None = None):
     fake = Faker(settings.LANGUAGE_CODE)
     email = EmailMessage(
         subject=fake.sentence(),
-        body=fake.paragraph(nb_sentences=5),
+        body='\n\n'.join(fake.texts(nb_texts=3, max_nb_chars=200)),
         from_email=fake.ascii_email(),
         to=[fake.ascii_email() for index in  range(2)],
         cc=[fake.ascii_email() for index in  range(2)],
@@ -22,7 +22,7 @@ def create_mail_html(attachment: str | None = None):
     fake = Faker(settings.LANGUAGE_CODE)
     email = EmailMultiAlternatives(
         subject=fake.sentence(),
-        body=fake.paragraph(nb_sentences=5),
+        body='\n\n'.join(fake.texts(nb_texts=3, max_nb_chars=200)),
         from_email=fake.ascii_email(),
         to=[fake.ascii_email() for index in range(2)],
         cc=[fake.ascii_email() for index in range(2)],

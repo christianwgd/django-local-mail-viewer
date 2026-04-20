@@ -61,7 +61,7 @@ msgid "Name"
 msgstr ""
 
 #: templates/local_mail_viewer/mail_detail.html:39
-msgid "View Attachement"
+msgid "View Attachment"
 msgstr "Anhang anzeigen"
 
 #: templates/local_mail_viewer/mail_detail.html:46

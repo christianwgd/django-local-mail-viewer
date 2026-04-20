@@ -10,8 +10,8 @@ urlpatterns = [
     path('delete/<str:filename>/', views.mail_delete, name='delete'),
     path('delete/', views.mail_delete_all, name='delete_all'),
     path(
-        'download-attachement/<str:filename>/<str:name>/',
-        views.download_attachement,
-        name='mail-attachement'
+        'download-attachment/<str:filename>/<str:name>/',
+        views.download_attachment,
+        name='mail-attachment'
     ),
 ]

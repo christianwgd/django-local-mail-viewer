@@ -15,12 +15,12 @@ def mail_list(request):
     """ Show a list of mail files """
 
     class MailFile:
-        def __init__(self, name, subject, date, receiver, has_attachements):
+        def __init__(self, name, subject, date, receiver, has_attachments):
             self.name = name
             self.subject = subject
             self.date = date
             self.rec = receiver
-            self.has_attachments = has_attachements
+            self.has_attachments = has_attachments
 
     def sort_filenameby_date(logfile):
         return logfile.date  # date
@@ -40,7 +40,7 @@ def mail_list(request):
                         mail_subject = make_header(decode_header(msg['subject']))
                         mail_to = msg['to']
                         mailfile = MailFile(
-                            mail, mail_subject, filedate, mail_to, has_attachements=msg.is_multipart()
+                            mail, mail_subject, filedate, mail_to, has_attachments=msg.is_multipart()
                         )
                         filelist.append(mailfile)
                     mail_file.close()
@@ -97,8 +97,8 @@ def mail_detail(request, filename):
     return render(request, 'local_mail_viewer/mail_detail.html', context)
 
 
-def download_attachement(request, filename, name):
-    """ Download an mail attachement """
+def download_attachment(request, filename, name):
+    """ Download an mail attachment """
 
     mail = []
 

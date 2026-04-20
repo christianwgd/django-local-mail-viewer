@@ -55,14 +55,14 @@ class MailTest(TestCase):
     def test_mail_download_attachment(self):
         self.client.force_login(self.user)
         response = self.client.get(
-            reverse('mail:mail-attachement', args=['20260420-201457-4422595600.log', 'sample.pdf'])
+            reverse('mail:mail-attachment', args=['20260420-201457-4422595600.log', 'sample.pdf'])
         )
         self.assertEqual(response.status_code, 200)
 
     def test_mail_download_attachment_no_match(self):
         self.client.force_login(self.user)
         response = self.client.get(
-            reverse('mail:mail-attachement', args=['20260420-201457-4422595600.log', 'test.pdf'])
+            reverse('mail:mail-attachment', args=['20260420-201457-4422595600.log', 'test.pdf'])
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('mail:mails'))
@@ -78,4 +78,4 @@ class MailTest(TestCase):
         self.client.force_login(self.user)
         response = self.client.get(reverse('mail:delete_all'))
         self.assertEqual(response.status_code, 302)
-        self.assertFalse(any(Path((settings.BASE_DIR) / 'sent_emails').iterdir()))
+        self.assertFalse(any(Path(settings.BASE_DIR / 'sent_emails').iterdir()))

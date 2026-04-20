@@ -8,5 +8,10 @@ urlpatterns = [
     path('', views.mail_list, name='mails'),
     path('detail/<str:filename>/', views.mail_detail, name='mail-detail'),
     path('delete/<str:filename>/', views.mail_delete, name='delete'),
-    path('delete/', views.mail_delete_all, name='delete_all')
+    path('delete/', views.mail_delete_all, name='delete_all'),
+    path(
+        'download-attachement/<str:filename>/<str:name>/',
+        views.download_attachement,
+        name='mail-attachement'
+    ),
 ]

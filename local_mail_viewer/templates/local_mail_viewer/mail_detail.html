@@ -33,7 +33,12 @@
 <h3>{% trans 'Attachments' %}</h3>
 <p>
     <b>{% trans 'Content Type' %}</b>: {{ attachment.type }}<br/>
-    <b>{% trans 'Name' %}</b>: {{ attachment.name }}<br/>
+    <b>{% trans 'Name' %}</b>: {{ attachment.name }}
+    {% if attachment.type != 'text/html' %}
+    <a target="_blank" rel="noopener noreferrer" href="{% url 'mail:mail-attachement' filename attachment.name %}">
+        {% trans 'View Attachement' %}
+    </a>
+    {% endif %}
 </p>
 <p>
     {% if attachment.content %}

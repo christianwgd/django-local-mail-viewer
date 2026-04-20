@@ -6,6 +6,7 @@ from email.header import make_header, decode_header
 
 from django.conf import settings
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
@@ -84,28 +85,36 @@ def mail_detail(request, filename):
                         attachment = {'name': name, 'type': content_type, 'content': content}
                     else:
                         attachment = {'name': name, 'type': content_type, 'content': None}
-                        # payload = part.get_payload(decode=True)
-                        # if payload and att_name:
-                            # media_path = 'media/attachments/'
-                            # Path(media_path).mkdir(parents=True, exist_ok=True)
-                            # att_file_name = Path(media_path) / att_name
-                            # with open(att_file_name, 'wb') as f:
-                            #     f.write(payload)
-                            #     context['att_content'] = (
-                            #         f'<a href="/{att_file_name}" target="_blank" rel="noopener noreferrer">'
-                            #         f'{att_file_name}</a>'
-                            #     )
                     attachments.append(attachment)
                 context['attachments'] = attachments
-
-
-
             else:
                 context['body'] = msg.get_payload(decode=True).decode('utf-8')
 
         mail_file.close()
 
     return render(request, 'local_mail_viewer/mail_detail.html', context)
+
+
+def download_attachement(request, filename, name):
+    """ Download an mail attachement """
+
+    mail = []
+
+    email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
+    if email_path is not None:
+        mail_file_name = os.path.join(email_path, filename)
+
+        with open(mail_file_name, "rb") as mail_file:
+            mail = mail_file.read()
+            msg = email.message_from_bytes(mail)
+
+            if msg.is_multipart():
+                for part in msg.walk():
+                    if part.get_filename() == name:
+                        return HttpResponse(part.get_payload(decode=True), content_type=part.get_content_type())
+    return redirect(reverse_lazy('mail:mails'))
+
+
 
 
 def mail_delete(request, filename):
@@ -136,4 +145,4 @@ def mail_delete_all(request):
         except Exception as exc:
             messages.add_message(request, messages.ERROR, f'Dateifehler: {exc}!')
 
-    return redirect(reverse_lazy('mail:mails'))
+    return redirect(reverse_lazy('mail:mail-detail', args=filename))

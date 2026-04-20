@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 13:09+0100\n"
+"POT-Creation-Date: 2026-04-20 15:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,42 +18,76 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/mail/mail_detail.html:22 templates/mail/mail_list.html:37
+#: templates/local_mail_viewer/mail_detail.html:10
+msgid "File"
+msgstr ""
+
+#: templates/local_mail_viewer/mail_detail.html:12
+#: templates/local_mail_viewer/mail_list.html:16
 msgid "Date"
 msgstr "Datum"
 
-#: templates/mail/mail_detail.html:27
+#: templates/local_mail_viewer/mail_detail.html:15
 msgid "From"
 msgstr "Von"
 
-#: templates/mail/mail_detail.html:32
+#: templates/local_mail_viewer/mail_detail.html:18
 msgid "To"
 msgstr "An"
 
-#: templates/mail/mail_detail.html:37
+#: templates/local_mail_viewer/mail_detail.html:22
 msgid "cc"
 msgstr "Kopie"
 
-#: templates/mail/mail_detail.html:42
-msgid "bc"
-msgstr "Blind-Kopie"
-
-#: templates/mail/mail_detail.html:47 templates/mail/mail_list.html:38
+#: templates/local_mail_viewer/mail_detail.html:26
+#: templates/local_mail_viewer/mail_list.html:17
 msgid "Subject"
 msgstr "Betreff"
 
-#: templates/mail/mail_detail.html:52
+#: templates/local_mail_viewer/mail_detail.html:29
 msgid "Body"
 msgstr "Inhalt"
 
-#: templates/mail/mail_detail.html:57
-msgid "Attachment"
-msgstr "Anhang"
+#: templates/local_mail_viewer/mail_detail.html:33
+msgid "Attachments"
+msgstr "Anhänge"
 
-#: templates/mail/mail_list.html:24
-msgid "E-mail files"
-msgstr "E-Mail Dateien"
+#: templates/local_mail_viewer/mail_detail.html:35
+msgid "Content Type"
+msgstr ""
 
-#: templates/mail/mail_list.html:39
+#: templates/local_mail_viewer/mail_detail.html:36
+msgid "Name"
+msgstr ""
+
+#: templates/local_mail_viewer/mail_detail.html:39
+msgid "View Attachement"
+msgstr "Anhang anzeigen"
+
+#: templates/local_mail_viewer/mail_detail.html:46
+msgid "Content"
+msgstr "Inhalt"
+
+#: templates/local_mail_viewer/mail_detail.html:54
+msgid "Back"
+msgstr "Zurück"
+
+#: templates/local_mail_viewer/mail_detail.html:57
+msgid "Delete"
+msgstr "Löschen"
+
+#: templates/local_mail_viewer/mail_list.html:10
+msgid "E-Mail List"
+msgstr "E-Mail Liste"
+
+#: templates/local_mail_viewer/mail_list.html:18
 msgid "Receiver"
 msgstr "Empfänger"
+
+#: templates/local_mail_viewer/mail_list.html:38
+msgid "Home"
+msgstr ""
+
+#: templates/local_mail_viewer/mail_list.html:41
+msgid "Delete all"
+msgstr "Alle löschen"

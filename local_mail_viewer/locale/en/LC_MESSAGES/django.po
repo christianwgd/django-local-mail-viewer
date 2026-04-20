@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-09 17:18+0100\n"
+"POT-Creation-Date: 2026-04-20 15:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,52 +17,77 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: templates/local_mail_viewer/mail_detail.html:11
-#: templates/local_mail_viewer/mail_list.html:24
+
+#: templates/local_mail_viewer/mail_detail.html:10
+msgid "File"
+msgstr ""
+
+#: templates/local_mail_viewer/mail_detail.html:12
+#: templates/local_mail_viewer/mail_list.html:16
 msgid "Date"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_detail.html:14
+#: templates/local_mail_viewer/mail_detail.html:15
 msgid "From"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_detail.html:17
+#: templates/local_mail_viewer/mail_detail.html:18
 msgid "To"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_detail.html:21
+#: templates/local_mail_viewer/mail_detail.html:22
 msgid "cc"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_detail.html:25
-#: templates/local_mail_viewer/mail_list.html:25
+#: templates/local_mail_viewer/mail_detail.html:26
+#: templates/local_mail_viewer/mail_list.html:17
 msgid "Subject"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_detail.html:28
+#: templates/local_mail_viewer/mail_detail.html:29
 msgid "Body"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_detail.html:32
+#: templates/local_mail_viewer/mail_detail.html:33
 msgid "Attachments"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_detail.html:34
+#: templates/local_mail_viewer/mail_detail.html:35
 msgid "Content Type"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_detail.html:35
+#: templates/local_mail_viewer/mail_detail.html:36
 msgid "Name"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_detail.html:38
+#: templates/local_mail_viewer/mail_detail.html:39
+msgid "View Attachement"
+msgstr ""
+
+#: templates/local_mail_viewer/mail_detail.html:46
 msgid "Content"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_list.html:12
-msgid "E-mail files"
+#: templates/local_mail_viewer/mail_detail.html:54
+msgid "Back"
 msgstr ""
 
-#: templates/local_mail_viewer/mail_list.html:26
+#: templates/local_mail_viewer/mail_detail.html:57
+msgid "Delete"
+msgstr ""
+
+#: templates/local_mail_viewer/mail_list.html:10
+msgid "E-Mail List"
+msgstr ""
+
+#: templates/local_mail_viewer/mail_list.html:18
 msgid "Receiver"
+msgstr ""
+
+#: templates/local_mail_viewer/mail_list.html:38
+msgid "Home"
+msgstr ""
+
+#: templates/local_mail_viewer/mail_list.html:41
+msgid "Delete all"
 msgstr ""

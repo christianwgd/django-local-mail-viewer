@@ -145,4 +145,4 @@ def mail_delete_all(request):
         except Exception as exc:
             messages.add_message(request, messages.ERROR, f'Dateifehler: {exc}!')
 
-    return redirect(reverse_lazy('mail:mail-detail', args=filename))
+    return redirect(reverse_lazy('mail:mails'))

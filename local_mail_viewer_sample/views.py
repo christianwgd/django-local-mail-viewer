@@ -12,6 +12,6 @@ def create_some_emails(request):
     for _index in range(3):
         create_mail_plain()
     create_mail_plain(attachment='test_files/sample.pdf')
-    for _index in range(2):
-        create_mail_html()
+    create_mail_plain(attachment='test_files/test.jpg')
+    create_mail_html()
     return redirect(reverse('home'))

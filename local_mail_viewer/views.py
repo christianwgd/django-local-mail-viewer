@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 
 
 def mail_list(request):
-    """ Liste von Mails anzeigen """
+    """ Show a list of mail files """
 
     class MailFile:
         def __init__(self, name, subject, date, receiver):
@@ -28,9 +28,7 @@ def mail_list(request):
 
     email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
     if email_path is not None:
-        # pylint: disable=broad-except
         try:
-            # pylint: disable=unused-variable
             for _root, _dirs, files in os.walk(email_path):  # @UnusedVariable
                 mails = fnmatch.filter(files, '*.log')
                 if len(mails) > 0:
@@ -55,7 +53,7 @@ def mail_list(request):
 
 
 def mail_detail(request, filename):
-    """ Mail-Datei anzeigen """
+    """ Show mail details """
 
     mail = []
 
@@ -115,7 +113,7 @@ def mail_detail(request, filename):
 
 
 def mail_delete(request, filename):
-    """ Eine einzelne Mail-Datei löschen """
+    """ Delete a single mail file """
 
     email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
     if email_path is not None:
@@ -126,7 +124,7 @@ def mail_delete(request, filename):
 
 
 def mail_delete_all(request):
-    """ Alle Mail-Dateien löschen """
+    """ Delete all mail files """
 
     email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
     if email_path is not None:

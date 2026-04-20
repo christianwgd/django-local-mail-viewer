@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
+DATE_TIME_FORMAT = '%a, %d %b %Y %H:%M:%S %z'
 
 def mail_list(request):
     """ Show a list of mail files """
@@ -62,7 +63,7 @@ def mail_detail(request, filename):
 
             context = {
                 'filename': filename,
-                'date': msg['date'],
+                'date': datetime.datetime.strptime(msg['date'], DATE_TIME_FORMAT),
                 'from': msg['from'],
                 'to': msg['to'],
                 'cc': msg['cc'],

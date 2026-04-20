@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}My amazing site{% endblock %}</title>
+    <title></title>
     {% block extra_head %}
     {% endblock %}
 </head>
 
-<div>
+<body>
+<div class="container">
+    <h1 class="title">{% block title %}Local E-Mail Viewer{% endblock %}</h1>
     {% block content %}{% endblock %}
 </div>
 </body>

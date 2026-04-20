@@ -1,7 +1,7 @@
-django==6.0.2
-pytest==9.0.2
-pytest-cov==7.0.0
+django==6.0.4
+pytest==9.0.3
+pytest-cov==7.1.0
 pytest-django==4.12.0
-ruff==0.15.4
-coverage==7.13.4
-Faker==40.4.0
+ruff==0.15.11
+coverage==7.13.5
+Faker==40.15.0

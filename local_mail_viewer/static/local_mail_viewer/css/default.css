@@ -1,3 +1,60 @@
+.title {
+    text-align: center;
+}
+
+.container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-family: sans-serif;
+}
+
 #mail-list, .row, .col-md-12 {
     width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1em;
+}
+
+#mail-list thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+#mail-list th,
+#mail-list td {
+    padding: 5px 5px;
+}
+
+#mail-list tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+#mail-list tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+#mail-list tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+h3 {
+    background-color: #009879;
+    color: #ffffff;
+    padding: 5px;
+}
+
+div.content {
+    background-color: #f3f3f3;
+    padding: 5px;
+    border: 1px solid #cccccc;
+}
+
+a {
+    margin-right: 10px;
+}
+
+a.disabled {
+    color: #999999;
+    pointer-events: none;
 }

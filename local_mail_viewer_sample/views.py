@@ -9,9 +9,9 @@ def index(request):
 
 
 def create_some_emails(request):
-    for index in range(3):
+    for _index in range(3):
         create_mail_plain()
     create_mail_plain(attachment='test_files/sample.pdf')
-    for index in range(2):
+    for _index in range(2):
         create_mail_html()
     return redirect(reverse('home'))

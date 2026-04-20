@@ -1,57 +1,55 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block page_title %}
-    {{ filename }}
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'local_mail_viewer/css/default.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <h5>{% trans 'Date' %}</h5>
-        <p>{{ date }}<p/>
+<h2 class="title">{% trans 'File' %}: {{ filename }}</h2>
 
-        <h5>{% trans 'From' %}</h5>
-        <p>{{ from }}<p/>
+<h3>{% trans 'Date' %}</h3>
+<p>{{ date|date:"r" }}</p>
 
-        <h5>{% trans 'To' %}</h5>
-        <p>{{ to }}<p/>
+<h3>{% trans 'From' %}</h3>
+<p>{{ from }}</p>
 
-        {% if cc %}
-            <h5>{% trans 'cc' %}</h5>
-            <p>{{ cc }}<p/>
-        {% endif %}
+<h3>{% trans 'To' %}</h3>
+<p>{{ to }}</p>
 
-        <h5>{% trans 'Subject' %}</h5>
-        <p>{{ subject }}<p/>
+{% if cc %}
+    <h3>{% trans 'cc' %}</h3>
+    <p>{{ cc }}</p>
+{% endif %}
 
-        <h5>{% trans 'Body' %}</h5>
-        <p>{{ body|linebreaks }}</p>
+<h3>{% trans 'Subject' %}</h3>
+<p>{{ subject }}</p>
 
-        {% for attachment in attachments %}
-        <h5>{% trans 'Attachments' %}</h5>
-        <p>
-            <b>{% trans 'Content Type' %}</b>: {{ attachment.type }}<br/>
-            <b>{% trans 'Name' %}</b>: {{ attachment.name }}<br/>
-            {% if attachment.content %}
-                <br/>
-                <b>{% trans 'Content' %}</b>:
-                {{ attachment.content|safe }}
-            {% endif %}
-        </p>
-        {% endfor %}
+<h3>{% trans 'Body' %}</h3>
+<p>{{ body|linebreaks }}</p>
 
-    </div>
-</div>
+{% for attachment in attachments %}
+<h3>{% trans 'Attachments' %}</h3>
+<p>
+    <b>{% trans 'Content Type' %}</b>: {{ attachment.type }}<br/>
+    <b>{% trans 'Name' %}</b>: {{ attachment.name }}<br/>
+</p>
+<p>
+    {% if attachment.content %}
+        <br/>
+        <b>{% trans 'Content' %}</b>:
+        <div class="content">{{ attachment.content|safe }}</div>
+    {% endif %}
+</p>
+{% endfor %}
 
-<div class="row">
-    <div class="col-md-12 buttons">
-        <a class="btn btn-vr btn-secondary" href="{% url 'mail:mails' %}">
-            <i class="fas fa-check"></i>
-        </a>
-        <a class="btn btn-vr btn-danger" href="{% url 'mail:delete' filename %}">
-            <i class="fas fa-trash-alt"></i>
-        </a>
-    </div>
+<div class="buttons">
+    <a href="{% url 'mail:mails' %}">
+        {% trans 'Back' %}
+    </a>
+    <a href="{% url 'mail:delete' filename %}">
+        {% trans 'Delete' %}
+    </a>
 </div>
 {% endblock %}

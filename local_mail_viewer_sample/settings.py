@@ -98,4 +98,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 DEFAULT_FROM_EMAIL = 'local-mail-viewer@example.com'
 EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
-

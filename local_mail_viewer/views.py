@@ -16,11 +16,12 @@ def mail_list(request):
     """ Show a list of mail files """
 
     class MailFile:
-        def __init__(self, name, subject, date, receiver):
+        def __init__(self, name, subject, date, receiver, has_attachements=False):
             self.name = name
             self.subject = subject
             self.date = date
             self.rec = receiver
+            self.has_attachments = has_attachements
 
     def sort_filenameby_date(logfile):
         return logfile.date  # date
@@ -39,7 +40,9 @@ def mail_list(request):
                         msg = email.message_from_file(mail_file)
                         mail_subject = make_header(decode_header(msg['subject']))
                         mail_to = msg['to']
-                        mailfile = MailFile(mail, mail_subject, filedate, mail_to)
+                        mailfile = MailFile(
+                            mail, mail_subject, filedate, mail_to, has_attachements=msg.is_multipart()
+                        )
                         filelist.append(mailfile)
                     mail_file.close()
                 filelist.sort(key=sort_filenameby_date, reverse=True)

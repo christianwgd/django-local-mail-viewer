@@ -16,6 +16,7 @@
                 <th>{% trans 'Date' %}</th>
                 <th>{% trans 'Subject' %}</th>
                 <th>{% trans 'Receiver' %}</th>
+                <th>{% trans 'Attachments' %}</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,9 @@
                 </td>
                 <td>{{ file.subject }}</td>
                 <td>{{ file.rec }}</td>
+                <td style="text-align: center;">
+                    {% if file.has_attachments %}&#10004;{% else %}-{% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>

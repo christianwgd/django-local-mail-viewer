@@ -44,7 +44,7 @@
     {% if attachment.content %}
         <br/>
         <b>{% trans 'Content' %}</b>:
-        <div class="content">{{ attachment.content|safe }}</div>
+        <div class="content">{{ attachment.content|safe|linebreaks }}</div>
     {% endif %}
 </p>
 {% endfor %}

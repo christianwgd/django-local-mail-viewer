@@ -8,11 +8,10 @@ __pycache__/
 log/
 fixtures/
 sent_emails/
-db.*
+test.db
 *.bak
 .coverage
 htmlcov/
 .pytest_cache
-kas-file-resubmit/
 coverage.xml
 unittest.xml

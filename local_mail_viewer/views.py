@@ -16,7 +16,7 @@ def mail_list(request):
     """ Show a list of mail files """
 
     class MailFile:
-        def __init__(self, name, subject, date, receiver, has_attachements=False):
+        def __init__(self, name, subject, date, receiver, has_attachements):
             self.name = name
             self.subject = subject
             self.date = date
@@ -136,16 +136,11 @@ def mail_delete_all(request):
 
     email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
     if email_path is not None:
-        # pylint: disable=broad-except
-        try:
-            # pylint: disable=unused-variable
-            for _root, _dirs, files in os.walk(email_path):  # @UnusedVariable
-                filelist = fnmatch.filter(files, '*.log')
-                if len(filelist) > 0:
-                    for filename in filelist:
-                        filepath = os.path.join(email_path, filename)
-                        os.remove(filepath)
-        except Exception as exc:
-            messages.add_message(request, messages.ERROR, f'Dateifehler: {exc}!')
+        for _root, _dirs, files in os.walk(email_path):  # @UnusedVariable
+            filelist = fnmatch.filter(files, '*.log')
+            if len(filelist) > 0:
+                for filename in filelist:
+                    filepath = os.path.join(email_path, filename)
+                    os.remove(filepath)
 
     return redirect(reverse_lazy('mail:mails'))

@@ -58,9 +58,7 @@ python_files = ["tests.py", "test_*.py"]
 omit = [
     "./manage.py",
     "**/*migrations*/*",
-    "local_mail_viewer_sample/wsgi.py",
-    "local_mail_viewer_sample/asgi.py",
-    "local_mail_viewer_sample/settings.py",
+    "local_mail_viewer_sample/*",
 ]
 
 [tool.django-stubs]

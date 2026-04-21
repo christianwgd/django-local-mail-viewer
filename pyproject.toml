@@ -18,7 +18,8 @@ license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
 [project.urls]
-Homepage = "https://github.com/christianwgd/django-local-mail-viewer"
+Repository = "https://github.com/christianwgd/django-local-mail-viewer"
+Changelog = "https://github.com/christianwiegand/django-local-mail-viewer/blob/main/CHANGELOG.md"
 
 [build-system]
 requires = ["setuptools >= 77.0.3"]

@@ -8,7 +8,7 @@ __pycache__/
 log/
 fixtures/
 sent_emails/
-test.db
+*.db
 *.bak
 .coverage
 htmlcov/

@@ -1,3 +1,29 @@
+[project]
+name = "django-local-mail-viewer"
+version = "0.0.1"
+authors = [
+  { name="Christian Wiegand" },
+]
+description = "A local mail viewer for Django development."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords=["django", "email", "develop"]
+dependencies = ["django"]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/christianwgd/django-local-mail-viewer"
+
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
 [tool.ruff]
 line-length = 120
 

@@ -8,8 +8,7 @@
 ``django-local-mail-viewer``is a Django app that provides a simple email viewer 
 for emails during development. It is used together with the email backend 
 ``django.core.mail.backends.filebased.EmailBackend``. You can browse the emails
-from through a web interface and view the content of those emails as well as 
-possible attachments.
+from a web interface and view the content of those emails as well as any attachments.
 
 ## Documentation
 
@@ -38,3 +37,7 @@ EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 You can choose the EMAIL_FILE_PATH to any name, it will be detected automatically.
 
 **Don't use the local mail viewer in production!**
+
+## Usage
+
+Open ``http://localhost:8000/mail/`` in your browser.

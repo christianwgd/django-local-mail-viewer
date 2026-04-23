@@ -15,5 +15,6 @@ htmlcov/
 .pytest_cache
 coverage.xml
 unittest.xml
+.idea/
 build/
 django_local_mail_viewer.egg-info/

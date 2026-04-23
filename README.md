@@ -1,7 +1,6 @@
 # django-local-mail-viewer
 
-[Run Test](https://github.com/christianwgd/django-local-mail-viewer/actions/workflows/python-test.yml/badge.svg)](https://github.com/christianwgd/django-local-mail-viewer/actions/workflows/python-test.yml)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Run Test](https://github.com/christianwgd/django-local-mail-viewer/actions/workflows/python-test.yml/badge.svg)](https://github.com/christianwgd/django-local-mail-viewer/actions/workflows/python-test.yml)[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 
 ``django-local-mail-viewer``is a Django app that provides a simple email viewer 

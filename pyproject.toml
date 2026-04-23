@@ -9,13 +9,16 @@ readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 keywords=["django", "email", "develop"]
-dependencies = ["django"]
+dependencies = ["Django"]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["local_mail_viewer"]
 
 [project.urls]
 Repository = "https://github.com/christianwgd/django-local-mail-viewer"

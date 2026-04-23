@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load static i18n %}
 
 {% block extra_head %}
     {{ block.super }}
@@ -38,7 +38,7 @@
     </table>
 
     <div class="buttons">
-        <a href="{% url 'home' %}">
+        <a href="/">
             {% trans 'Home' %}
         </a>
         <a class="{% if not filelist %} disabled{% endif %}" href="{% url 'mail:delete_all' %}">

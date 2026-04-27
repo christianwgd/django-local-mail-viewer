@@ -3,10 +3,12 @@ import shutil
 from pathlib import Path
 from django.conf import settings
 from django.contrib import auth
+from django.http import Http404
 from django.test import TestCase
 from django.urls import reverse
 from faker import Faker
 
+from local_mail_viewer.views import get_email_base_path, get_safe_mail_path
 
 user_model = auth.get_user_model()
 
@@ -23,6 +25,18 @@ class MailTest(TestCase):
 
     def tearDown(self):
         shutil.rmtree('sent_emails')
+
+    def test_get_email_base_path(self):
+        self.assertEqual(get_email_base_path(), Path(settings.BASE_DIR) / 'sent_emails')
+
+    def test_get_email_base_path_none(self):
+        with self.settings(EMAIL_FILE_PATH=None):
+            self.assertIsNone(get_email_base_path())
+
+    def test_get_safe_mail_path_no_base_path(self):
+        with self.settings(EMAIL_FILE_PATH=None):
+            with self.assertRaises(Http404):
+                get_safe_mail_path('test.log')
 
     def test_mail_list(self):
         self.assertTrue((Path(settings.BASE_DIR) / 'sent_emails').is_dir())

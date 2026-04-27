@@ -34,19 +34,14 @@
 <p>
     <b>{% trans 'Content Type' %}</b>: {{ attachment.type }}<br/>
     <b>{% trans 'Name' %}</b>: {{ attachment.name }}
-    {% if attachment.type != 'multipart/mixed' %}
+    {% if attachment.type != 'text/html' %}
     <a target="_blank" rel="noopener noreferrer" href="{% url 'mail:mail-attachment' filename attachment.name %}">
         {% trans 'View Attachment' %}
     </a>
-    {% else %}
-        <br/>
-        <b>{% trans 'Content' %}</b>:
-        <div class="content">{{ attachment.content|safe|linebreaks }}</div>
     {% endif %}
 </p>
 <p>
     {% if attachment.content %}
-        <br/>
         <b>{% trans 'Content' %}</b>:
         <div class="content">{{ attachment.content|safe|linebreaks }}</div>
     {% endif %}

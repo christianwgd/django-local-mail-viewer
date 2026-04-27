@@ -29,15 +29,19 @@
 <h3>{% trans 'Body' %}</h3>
 <p>{{ body|linebreaks }}</p>
 
-{% for attachment in attachments %}
 <h3>{% trans 'Attachments' %}</h3>
+{% for attachment in attachments %}
 <p>
     <b>{% trans 'Content Type' %}</b>: {{ attachment.type }}<br/>
     <b>{% trans 'Name' %}</b>: {{ attachment.name }}
-    {% if attachment.type != 'text/html' %}
+    {% if attachment.type != 'multipart/mixed' %}
     <a target="_blank" rel="noopener noreferrer" href="{% url 'mail:mail-attachment' filename attachment.name %}">
         {% trans 'View Attachment' %}
     </a>
+    {% else %}
+        <br/>
+        <b>{% trans 'Content' %}</b>:
+        <div class="content">{{ attachment.content|safe|linebreaks }}</div>
     {% endif %}
 </p>
 <p>

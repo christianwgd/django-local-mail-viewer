@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from faker import Faker
 
 
-def create_mail_plain(attachment: str | None = None):
+def create_mail_plain(attachments: list[str]):
     fake = Faker(settings.LANGUAGE_CODE)
     email = EmailMessage(
         subject=fake.sentence(),
@@ -13,12 +13,12 @@ def create_mail_plain(attachment: str | None = None):
         to=[fake.ascii_email() for index in  range(2)],
         cc=[fake.ascii_email() for index in  range(2)],
     )
-    if attachment is not None:
+    for attachment in attachments:
         email.attach_file(attachment)
     email.send(fail_silently=False)
 
 
-def create_mail_html(attachment: str | None = None):
+def create_mail_html(attachments: list[str]):
     fake = Faker(settings.LANGUAGE_CODE)
     email = EmailMultiAlternatives(
         subject=fake.sentence(),
@@ -36,6 +36,6 @@ def create_mail_html(attachment: str | None = None):
         context=context,
     )
     email.attach_alternative(html_content, "text/html")
-    if attachment is not None:
+    for attachment in attachments:
         email.attach_file(attachment)
     email.send(fail_silently=False)

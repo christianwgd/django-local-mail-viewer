@@ -2,49 +2,64 @@ import datetime
 import email
 import fnmatch
 import os
+from dataclasses import dataclass
 from email.header import make_header, decode_header
+from pathlib import Path
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
 DATE_TIME_FORMAT = '%a, %d %b %Y %H:%M:%S %z'
 
+
+@dataclass
+class MailFile:
+    name: str
+    subject: str
+    date: datetime.datetime
+    rec: str
+    has_attachments: bool
+
+
+def get_email_base_path():
+    email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
+    if email_path is None:
+        return None
+    return Path(email_path).resolve()
+
+
+def get_safe_mail_path(filename):
+    base_path = get_email_base_path()
+    if base_path is None:
+        msg = "Email path is not configured"
+        raise Http404(msg)
+
+
 def mail_list(request):
-    """ Show a list of mail files """
-
-    class MailFile:
-        def __init__(self, name, subject, date, receiver, has_attachments):
-            self.name = name
-            self.subject = subject
-            self.date = date
-            self.rec = receiver
-            self.has_attachments = has_attachments
-
-    def sort_filenameby_date(logfile):
-        return logfile.date  # date
+    """Show a list of mail files."""
 
     filelist = []
+    email_path = get_email_base_path()
 
-    email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
     if email_path is not None:
-        for _root, _dirs, files in os.walk(email_path):  # @UnusedVariable
-            mails = fnmatch.filter(files, '*.log')
-            if len(mails) > 0:
-                for mail in mails:
-                    mail_path = os.path.join(email_path, mail)
-                    filedate = datetime.datetime.fromtimestamp(os.path.getmtime(mail_path))
-                    with open(mail_path, encoding="utf-8") as mail_file:
-                        msg = email.message_from_file(mail_file)
-                        mail_subject = make_header(decode_header(msg['subject']))
-                        mail_to = msg['to']
-                        mailfile = MailFile(
-                            mail, mail_subject, filedate, mail_to, has_attachments=msg.is_multipart()
-                        )
-                        filelist.append(mailfile)
-                    mail_file.close()
-                filelist.sort(key=sort_filenameby_date, reverse=True)
+        for mail_path in email_path.glob('*.log'):
+            filedate = datetime.datetime.fromtimestamp(mail_path.stat().st_mtime)
+
+            with open(mail_path, encoding="utf-8") as mail_file:
+                msg = email.message_from_file(mail_file)
+
+            mailfile = MailFile(
+                name=mail_path.name,
+                subject=str(make_header(decode_header(msg.get('subject', '')))),
+                date=filedate,
+                rec=msg.get('to', ''),
+                has_attachments=msg.is_multipart(),
+            )
+            filelist.append(mailfile)
+
+    filelist.sort(key=lambda mail_file: mail_file.date, reverse=True)
 
     return render(request, 'local_mail_viewer/mail_list.html', {
         'filelist': filelist,
@@ -52,6 +67,7 @@ def mail_list(request):
 
 
 def mail_detail(request, filename):
+
     """ Show mail details """
 
     mail = []
@@ -74,8 +90,8 @@ def mail_detail(request, filename):
             }
 
             if msg.is_multipart():
+                attachments = []
                 for part in msg.walk():
-                    attachments = []
                     content_type = part.get_content_type()
                     name = 'HTML Content' if part.get_filename() is None else part.get_filename()
                     if content_type == 'text/plain':
@@ -84,10 +100,11 @@ def mail_detail(request, filename):
                         payload = part.get_payload(decode=True)
                         if payload is not None:
                             content = payload.decode('utf-8')
-                        attachment = {'name': name, 'type': content_type, 'content': content}
+                            attachments.append({'name': name, 'type': content_type, 'content': content})
+                    elif content_type in ['multipart/alternative', 'multipart/mixed']:
+                        pass  # skipt this
                     else:
-                        attachment = {'name': name, 'type': content_type, 'content': None}
-                    attachments.append(attachment)
+                        attachments.append({'name': name, 'type': content_type, 'content': None})
                 context['attachments'] = attachments
             else:
                 context['body'] = msg.get_payload(decode=True).decode('utf-8')
@@ -115,8 +132,6 @@ def download_attachment(request, filename, name):
                     if part.get_filename() == name:
                         return HttpResponse(part.get_payload(decode=True), content_type=part.get_content_type())
     return redirect(reverse_lazy('mail:mails'))
-
-
 
 
 def mail_delete(request, filename):

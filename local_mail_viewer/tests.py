@@ -1,6 +1,8 @@
 import fnmatch
 import shutil
 from pathlib import Path
+
+import pytest
 from django.conf import settings
 from django.contrib import auth
 from django.http import Http404
@@ -34,9 +36,8 @@ class MailTest(TestCase):
             self.assertIsNone(get_email_base_path())
 
     def test_get_safe_mail_path_no_base_path(self):
-        with self.settings(EMAIL_FILE_PATH=None):
-            with self.assertRaises(Http404):
-                get_safe_mail_path('test.log')
+        with self.settings(EMAIL_FILE_PATH=None), pytest.raises(Http404):
+            get_safe_mail_path('test.log')
 
     def test_mail_list(self):
         self.assertTrue((Path(settings.BASE_DIR) / 'sent_emails').is_dir())

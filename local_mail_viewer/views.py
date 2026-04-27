@@ -33,7 +33,8 @@ def get_email_base_path():
 def get_safe_mail_path(filename):
     base_path = get_email_base_path()
     if base_path is None:
-        raise Http404("Email path is not configured")
+        msg = "Email path is not configured"
+        raise Http404(msg)
 
 
 def mail_list(request):

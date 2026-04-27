@@ -1,12 +1,10 @@
-from typing import List
-
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template.loader import render_to_string
 from faker import Faker
 
 
-def create_mail_plain(attachments: List[str]):
+def create_mail_plain(attachments: list[str]):
     fake = Faker(settings.LANGUAGE_CODE)
     email = EmailMessage(
         subject=fake.sentence(),
@@ -20,7 +18,7 @@ def create_mail_plain(attachments: List[str]):
     email.send(fail_silently=False)
 
 
-def create_mail_html(attachments: List[str]):
+def create_mail_html(attachments: list[str]):
     fake = Faker(settings.LANGUAGE_CODE)
     email = EmailMultiAlternatives(
         subject=fake.sentence(),

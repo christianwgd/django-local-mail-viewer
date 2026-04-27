@@ -3,7 +3,7 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Run Test](https://github.com/christianwgd/django-local-mail-viewer/actions/workflows/python-test.yml/badge.svg)](https://github.com/christianwgd/django-local-mail-viewer/actions/workflows/python-test.yml)
 [![codecov](https://codecov.io/github/christianwgd/django-local-mail-viewer/graph/badge.svg?token=i3jXueSzIY)](https://codecov.io/github/christianwgd/django-local-mail-viewer)
-
+[![PyPI](https://img.shields.io/pypi/v/django-local-mail-viewer)](https://pypi.org/project/django-local-mail-viewer/)
 
 ``django-local-mail-viewer``is a Django app that provides a simple email viewer 
 for emails during development. It is used together with the email backend 

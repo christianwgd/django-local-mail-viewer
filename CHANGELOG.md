@@ -2,10 +2,15 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 0.0.3
+
+### Fixed
+  - Remove non-functional link for text/html attachements
+
 ## 0.0.2
 
-###
-   - Fixed handling of multiple attachments 
+### Fixed
+   - Fixe handling of multiple attachments 
 
 ## 0.0.1
 

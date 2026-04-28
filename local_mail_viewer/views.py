@@ -20,7 +20,7 @@ class MailFile:
     subject: str
     date: datetime.datetime
     rec: str
-    has_attachments: bool
+    attachments_count: int = 0
 
 
 def get_email_base_path():
@@ -35,6 +35,21 @@ def get_safe_mail_path(filename):
     if base_path is None:
         msg = "Email path is not configured"
         raise Http404(msg)
+
+
+def count_attachments(email_message: email.message.Message):
+    """ Count the attachments in a mail file """
+    if email_message.is_multipart():
+        excluded_content_types = {
+            'text/html', 'text/plain',
+            'multipart/alternative', 'multipart/mixed'
+        }
+        return sum(
+            1
+            for part in email_message.walk()
+            if part.get_content_type() not in excluded_content_types
+        )
+    return 0
 
 
 def mail_list(request):
@@ -55,7 +70,7 @@ def mail_list(request):
                 subject=str(make_header(decode_header(msg.get('subject', '')))),
                 date=filedate,
                 rec=msg.get('to', ''),
-                has_attachments=msg.is_multipart(),
+                attachments_count=count_attachments(msg),
             )
             filelist.append(mailfile)
 

@@ -1,3 +1,4 @@
+import email
 import fnmatch
 import shutil
 from pathlib import Path
@@ -10,7 +11,7 @@ from django.test import TestCase
 from django.urls import reverse
 from faker import Faker
 
-from local_mail_viewer.views import get_email_base_path, get_safe_mail_path
+from local_mail_viewer.views import get_email_base_path, get_safe_mail_path, count_attachments
 
 user_model = auth.get_user_model()
 
@@ -38,6 +39,20 @@ class MailTest(TestCase):
     def test_get_safe_mail_path_no_base_path(self):
         with self.settings(EMAIL_FILE_PATH=None), pytest.raises(Http404):
             get_safe_mail_path('test.log')
+
+    def test_count_attachments_is_zero(self):
+        with open(Path(settings.BASE_DIR) / 'sent_emails/20260420-201457-4423828768.log', "rb") as mail_file:
+            mail = mail_file.read()
+            msg = email.message_from_bytes(mail)
+            self.assertEqual(msg.get_content_maintype(), 'multipart')
+            self.assertEqual(count_attachments(msg), 0)
+
+    def test_count_attachments_is_one(self):
+        with open(Path(settings.BASE_DIR) / 'sent_emails/20260420-201457-4422595600.log', "rb") as mail_file:
+            mail = mail_file.read()
+            msg = email.message_from_bytes(mail)
+            self.assertEqual(msg.get_content_maintype(), 'multipart')
+            self.assertEqual(count_attachments(msg), 1)
 
     def test_mail_list(self):
         self.assertTrue((Path(settings.BASE_DIR) / 'sent_emails').is_dir())

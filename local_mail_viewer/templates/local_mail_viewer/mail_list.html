@@ -29,9 +29,7 @@
                 </td>
                 <td>{{ file.subject }}</td>
                 <td>{{ file.rec }}</td>
-                <td style="text-align: center;">
-                    {% if file.has_attachments %}&#10004;{% else %}-{% endif %}
-                </td>
+                <td style="text-align: center;">{{ file.attachments_count }}</td>
             </tr>
             {% endfor %}
         </tbody>

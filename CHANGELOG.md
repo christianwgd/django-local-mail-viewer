@@ -2,10 +2,15 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 0.0.4
+
+### Changed
+  - Show number of attachments in email list
+
 ## 0.0.3
 
 ### Fixed
-  - Remove non-functional link for text/html attachements
+  - Remove non-functional link for text/html attachments
 
 ## 0.0.2
 

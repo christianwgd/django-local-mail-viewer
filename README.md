@@ -17,14 +17,14 @@ Install via pipy running ``pip install django-local-mail-viewer`` and add
 settings file or add this for more flexibility:
 ```
 if DEBUG:
-    INSTALLED_APPS += ['django_local_mail_viewer']
+    INSTALLED_APPS += ['local_mail_viewer']
 ```
 
 Add ``path('mail/', include('local_mail_viewer.urls'))`` to your ``urls.py``.
 This can also be done conditionally:
 ```
 if settings.DEBUG:
-    urlpatterns += path('mail/', include('local_mail_viewer.urls'))
+    urlpatterns += [path("mail/", include("local_mail_viewer.urls"))]
 ```
 
 Set your email config as follows:

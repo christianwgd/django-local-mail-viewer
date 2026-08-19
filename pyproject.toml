@@ -1,6 +1,6 @@
 [project]
 name = "django-local-mail-viewer"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
   { name="Christian Wiegand" },
 ]

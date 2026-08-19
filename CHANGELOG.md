@@ -2,6 +2,12 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 0.0.6
+
+### Fixed
+  - Fixed an error with new MAILERS setting when mail_detail 
+    view didn't use the correct method for getting the email path 
+
 ## 0.0.5
 
 ### Fixed

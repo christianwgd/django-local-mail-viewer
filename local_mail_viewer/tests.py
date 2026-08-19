@@ -36,6 +36,21 @@ class MailTest(TestCase):
         with self.settings(EMAIL_FILE_PATH=None):
             self.assertIsNone(get_email_base_path())
 
+    def test_get_safe_mail_path_from_mailers(self):
+        base_dir = settings.BASE_DIR
+        with self.settings(
+            EMAIL_FILE_PATH=None,
+            MAILERS = {
+                "default": {
+                    "BACKEND": "django.core.mail.backends.filebased.EmailBackend",
+                    "OPTIONS": {
+                        "file_path": base_dir / 'sent_emails',
+                    },
+                },
+            }
+        ):
+            self.assertEqual(get_email_base_path(), base_dir / "sent_emails")
+
     def test_get_safe_mail_path_no_base_path(self):
         with self.settings(EMAIL_FILE_PATH=None), pytest.raises(Http404):
             get_safe_mail_path('test.log')

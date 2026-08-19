@@ -24,7 +24,14 @@ class MailFile:
 
 
 def get_email_base_path():
-    email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
+    # Django 6.1 changed the way to configure email settings
+    email_path = None
+    if hasattr(settings, 'MAILERS'):
+        mailers = getattr(settings, "MAILERS", None)
+        if 'default' in mailers and 'OPTIONS' in mailers['default'] and 'file_path' in mailers['default']['OPTIONS']:
+            email_path = mailers["default"]["OPTIONS"]["file_path"]
+    else:
+        email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
     if email_path is None:
         return None
     return Path(email_path).resolve()

@@ -2,6 +2,14 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 0.0.5
+
+### Fixed
+  - Fixed wrong installation instruction in README
+
+### Changed
+  - Support Django 6.1 "MAILERS" settings
+
 ## 0.0.4
 
 ### Changed

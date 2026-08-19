@@ -94,7 +94,7 @@ def mail_detail(request, filename):
 
     mail = []
 
-    email_path = getattr(settings, 'EMAIL_FILE_PATH', None)
+    email_path = get_email_base_path()
     if email_path is not None:
         mail_file_name = os.path.join(email_path, filename)
 
